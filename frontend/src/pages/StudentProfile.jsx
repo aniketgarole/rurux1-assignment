@@ -1,15 +1,13 @@
-// src/components/Profile.js
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from  '../styles/profile.module.css'; // Import CSS file for styling
+import styles from  '../styles/profile.module.css'; 
 import { Link } from 'react-router-dom';
 
 const StudentProfile = () => {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    // Implement backend API call to fetch student profile
     axios.get('/api/students/profile')
       .then(res => {
         setProfileData(res.data);

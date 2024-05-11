@@ -6,13 +6,11 @@ const Performance = () => {
   const [performanceData, setPerformanceData] = useState(null);
 
   useEffect(() => {
-    // Fetch performance data from backend when component mounts
     fetchPerformanceData();
   }, []);
 
   const fetchPerformanceData = async () => {
     try {
-      // Make GET request to fetch performance data
       const response = await axios.get('/api/student/performance');
       setPerformanceData(response.data);
     } catch (error) {

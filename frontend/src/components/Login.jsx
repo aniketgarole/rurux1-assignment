@@ -1,7 +1,7 @@
-// src/components/Login.js
+
 
 import React, { useState } from 'react';
-import styles from '../styles/login.module.css'; // Import CSS file for styling
+import styles from '../styles/login.module.css'; 
 import { Link } from 'react-router-dom';
 
 
@@ -9,7 +9,7 @@ const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    userType: 'student' // Default user type is student
+    userType: 'student' 
   });
 
   const { username, password, userType } = formData;
@@ -18,7 +18,7 @@ const Login = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    // Implement backend API call to log in user
+    
     console.log('Form submitted:', formData);
   };
 

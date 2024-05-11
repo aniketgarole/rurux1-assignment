@@ -1,7 +1,6 @@
-// src/components/Signup.js
 
 import React, { useState } from 'react';
-import styles from '../styles/signup.module.css'; // Import CSS file for styling
+import styles from '../styles/signup.module.css'; 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +18,6 @@ const Signup = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    // Implement backend API call to register student
     try {
       let res = await axios.post("http://127.0.0.1:8080/students/signup", formData)
       console.log(res)
