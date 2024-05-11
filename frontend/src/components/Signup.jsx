@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import styles from '../styles/signup.module.css'; // Import CSS file for styling
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +39,7 @@ const Signup = () => {
         <input type="text" placeholder="Field/Stream" name="field" value={field} onChange={onChange} required />
         <button type="submit">Sign Up</button>
       </form>
+      <p>Already have an account? <Link to="/login">Login</Link></p>
     </div>
   );
 };

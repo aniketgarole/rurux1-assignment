@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import styles from '../styles/login.module.css'; // Import CSS file for styling
+import { Link } from 'react-router-dom';
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -32,6 +34,7 @@ const Login = () => {
         </select>
         <button type="submit">Login</button>
       </form>
+      <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </div>
   );
 };
