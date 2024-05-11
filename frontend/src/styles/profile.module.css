@@ -1,0 +1,15 @@
+/* src/components/Profile.css */
+
+.profile-container {
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  .profile-container h2 {
+    text-align: center;
+  }
+  
+  .profile-container p {
+    margin-bottom: 10px;
+  }
+  
