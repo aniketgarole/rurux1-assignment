@@ -1,4 +1,5 @@
 const express = require("express")
+const cors = require("cors")
 const { connection } = require("./connect")
 const studentRoutes = require('./routes/student.routes.js');
 const streamRoutes = require('./routes/stream.routes.js');
