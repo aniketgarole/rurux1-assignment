@@ -1,6 +1,9 @@
 const express = require("express")
 const { connection } = require("./connect")
-
+const studentRoutes = require('./routes/studentRoutes');
+const streamRoutes = require('./routes/streamRoutes');
+const subjectRoutes = require('./routes/subjectRoutes');
+const markRoutes = require('./routes/markRoutes');
 const app = express()
 
 // app.use(express.json())
@@ -9,7 +12,10 @@ app.use(express.json())
 app.use(cors())
 
 
-
+app.use('/students', studentRoutes);
+app.use('/streams', streamRoutes);
+app.use('/subjects', subjectRoutes);
+app.use('/marks', markRoutes);
 
 
 

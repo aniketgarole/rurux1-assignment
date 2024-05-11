@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const studentSchema = mongoose.Schema({
     studentId: {type: String},
     streamId: {type: String},
-    subject: {type: String},
+    subjectId: {type: String},
     marks: {type: Number}
     
 },{
