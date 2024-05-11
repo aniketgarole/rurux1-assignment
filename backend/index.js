@@ -1,9 +1,9 @@
 const express = require("express")
 const { connection } = require("./connect")
-const studentRoutes = require('./routes/studentRoutes');
-const streamRoutes = require('./routes/streamRoutes');
-const subjectRoutes = require('./routes/subjectRoutes');
-const markRoutes = require('./routes/markRoutes');
+const studentRoutes = require('./routes/student.routes.js');
+const streamRoutes = require('./routes/stream.routes.js');
+const subjectRoutes = require('./routes/subject.routes.js');
+const markRoutes = require('./routes/marks.routes.js');
 const app = express()
 
 // app.use(express.json())

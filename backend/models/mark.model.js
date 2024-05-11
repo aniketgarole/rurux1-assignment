@@ -1,17 +1,24 @@
-const mongoose = require("mongoose")
+// models/mark.model.js
 
-const studentSchema = mongoose.Schema({
-    studentId: {type: String},
-    streamId: {type: String},
-    subjectId: {type: String},
-    marks: {type: Number}
-    
-},{
-    versionKey: false
-})
+const mongoose = require('mongoose');
 
+const markSchema = new mongoose.Schema({
+  studentId: {
+    type: String,
+    required: true
+  },
+  subjectId: {
+    type: String,
+    required: true
+  },
+  streamId: {
+    type: String,
+    required: true
+  },
+  marksObtained: {
+    type: Number,
+    required: true
+  }
+});
 
-const studentModel = mongoose.model("student", studentSchema)
-
-
-module.exports = {studentModel}
+module.exports = mongoose.model('Mark', markSchema);

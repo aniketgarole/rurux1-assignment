@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Stream = require('../models/stream');
+const Stream = require('../models/stream.model');
 
 // Route for creating a new stream record
 router.post('/', async (req, res) => {

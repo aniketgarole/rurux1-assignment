@@ -1,66 +1,112 @@
-const express = require("express")
-const bcrypt = require('bcrypt');
-var jwt = require('jsonwebtoken');
-const { studentModel } = require("../model/student.model");
+// routes/student.routes.js
 
-const studentRouter = express.Router()
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const Student = require('../models/student.model');
 
+// Route for student signup
+router.post('/signup', async (req, res) => {
+  const { username, password, year, field } = req.body;
 
-studentRouter.post("/register", async(req, res)=> {
-    const {password} = req.body
-
-    try {
-        bcrypt.hash(password, 5, async function(err, hash) {
-            if (hash) {
-                const user = new studentModel({...req.body, "password": hash})
-                await user.save()
-                res.status(200).json({"msg": "New student has been registered"})
-            } else if (err) {
-                res.status(200).json({"msg": err.message})
-            }
-        });
-        
-    } catch (error) {
-        res.status(400).json({"err": error.message})
-    }
-})
-
-
-studentRouter.post("/login", async(req, res)=> {
-    
-
-    try {
-        const {email, password} = req.body
-
-        let user = await studentModel.findOne({email})
-
-        if (user) {
-            let passwordSentByUser = password
-            let passwordFromDB = user.password
-            let userId = user._id
-
-            bcrypt.compare(passwordSentByUser, passwordFromDB, function(err, result) {
-                if (result) {
-                    var token = jwt.sign({ email, userId }, 'avenger');
-                    try {
-                        res.status(200).json({"msg": "Login Successful", "token": token})
-                    } catch (error) {
-                        res.status(200).json({"msg": "please login"})
-                    }
-                }
-            });
-        } else {
-            res.status(200).json({"msg": "User not found"})
-        }
-        
-    } catch (error) {
-        res.status(400).json({"err": error.message})
+  try {
+    // Check if student already exists
+    let student = await Student.findOne({ username });
+    if (student) {
+      return res.status(400).json({ message: 'Student already exists' });
     }
 
-    
-})
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create new student
+    student = new Student({
+      username,
+      password: hashedPassword,
+      year,
+      field
+    });
 
+    // Save student to database
+    await student.save();
 
-module.exports = {studentRouter}
+    res.status(201).json({ message: 'Student created successfully' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
+// Route for student login
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Check if student exists
+    const student = await Student.findOne({ username });
+    if (!student) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    // Check password
+    const isPasswordMatch = await bcrypt.compare(password, student.password);
+    if (!isPasswordMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    // Return success message
+    res.status(200).json({ message: 'Login successful' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Route to retrieve profile information of the logged-in student
+router.get('/profile', async (req, res) => {
+  try {
+    // Get student ID from request (you'll need to implement this based on authentication)
+    const studentId = req.user.id;
+
+    // Retrieve student profile from database
+    const student = await Student.findById(studentId).select('-password');
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    res.json(student);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// routes/student.routes.js
+
+// Existing code...
+
+// Route to retrieve performance data of the logged-in student
+router.get('/performance', async (req, res) => {
+    try {
+      // Get student ID from request (you'll need to implement this based on authentication)
+      const studentId = req.user.id;
+  
+      // Query subjects and their marks for the student from the database
+      // For example:
+      const subjectsAndMarks = await Mark.find({ studentId }).populate('subjectId');
+      
+      // Extract subject names and marks from the query result
+      const performanceData = subjectsAndMarks.map(item => ({
+        subject: item.subjectId.name,
+        marks: item.marksObtained
+      }));
+  
+      res.json(performanceData);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
+  module.exports = router;
+  

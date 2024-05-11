@@ -1,15 +1,17 @@
-const mongoose = require("mongoose")
+// models/subject.model.js
 
-const subjectSchema = mongoose.Schema({
-    name: {type: String, required: true},
-    streamId: {type: String}
-    
-},{
-    versionKey: false
-})
+const mongoose = require('mongoose');
 
+const subjectSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  streamId: {
+    type: String,
+    required: true
+  }
+});
 
-const subjectModel = mongoose.model("student", subjectSchema)
-
-
-module.exports = {subjectModel}
+module.exports = mongoose.model('Subject', subjectSchema);

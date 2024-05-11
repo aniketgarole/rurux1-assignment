@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Mark = require('../models/mark');
+const Mark = require('../models/marks.model');
 
 // Route for creating a new mark record
 router.post('/', async (req, res) => {

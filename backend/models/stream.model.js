@@ -1,15 +1,13 @@
-const mongoose = require("mongoose")
+// models/stream.model.js
 
-const streamSchema = mongoose.Schema({
-    name: {type: String, required: true},
-    
-    
-},{
-    versionKey: false
-})
+const mongoose = require('mongoose');
 
+const streamSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  }
+});
 
-const streamModel = mongoose.model("student", streamSchema)
-
-
-module.exports = {streamModel}
+module.exports = mongoose.model('Stream', streamSchema);

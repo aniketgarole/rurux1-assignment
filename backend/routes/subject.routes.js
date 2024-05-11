@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Subject = require('../models/subject');
+const Subject = require('../models/subject.model');
 
 // Route for creating a new subject record
 router.post('/', async (req, res) => {
