@@ -1,4 +1,3 @@
-// models/subject.model.js
 
 const mongoose = require('mongoose');
 

@@ -1,4 +1,3 @@
-// models/student.model.js
 
 const mongoose = require('mongoose');
 

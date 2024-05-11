@@ -7,7 +7,6 @@ const subjectRoutes = require('./routes/subject.routes.js');
 const markRoutes = require('./routes/marks.routes.js');
 const app = express()
 
-// app.use(express.json())
 
 app.use(express.json())
 app.use(cors())

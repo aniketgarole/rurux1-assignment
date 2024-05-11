@@ -1,10 +1,8 @@
-// routes/subjectRoutes.js
 
 const express = require('express');
 const router = express.Router();
 const Subject = require('../models/subject.model');
 
-// Route for creating a new subject record
 router.post('/', async (req, res) => {
   try {
     const { name, streamId } = req.body;
@@ -16,7 +14,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Route for retrieving all subject records
 router.get('/', async (req, res) => {
   try {
     const subjects = await Subject.find();
@@ -26,12 +23,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route for retrieving a single subject record by ID
 router.get('/:id', getSubject, (req, res) => {
   res.json(res.subject);
 });
 
-// Route for updating a subject record
 router.patch('/:id', getSubject, async (req, res) => {
   if (req.body.name != null) {
     res.subject.name = req.body.name;
@@ -47,7 +42,6 @@ router.patch('/:id', getSubject, async (req, res) => {
   }
 });
 
-// Route for deleting a subject record
 router.delete('/:id', getSubject, async (req, res) => {
   try {
     await res.subject.remove();
@@ -57,7 +51,6 @@ router.delete('/:id', getSubject, async (req, res) => {
   }
 });
 
-// Middleware function to get a single subject record by ID
 async function getSubject(req, res, next) {
   let subject;
   try {

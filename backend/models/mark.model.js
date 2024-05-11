@@ -1,4 +1,3 @@
-// models/mark.model.js
 
 const mongoose = require('mongoose');
 

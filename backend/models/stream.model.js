@@ -1,4 +1,3 @@
-// models/stream.model.js
 
 const mongoose = require('mongoose');
 

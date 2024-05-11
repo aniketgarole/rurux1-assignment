@@ -1,10 +1,8 @@
-// routes/markRoutes.js
 
 const express = require('express');
 const router = express.Router();
 const Mark = require('../models/mark.model');
 
-// Route for creating a new mark record
 router.post('/', async (req, res) => {
   try {
     const { studentId, subjectId, streamId, marksObtained } = req.body;
@@ -16,7 +14,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Route for retrieving all mark records
 router.get('/', async (req, res) => {
   try {
     const marks = await Mark.find();
@@ -26,12 +23,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route for retrieving a single mark record by ID
 router.get('/:id', getMark, (req, res) => {
   res.json(res.mark);
 });
 
-// Route for updating a mark record
 router.patch('/:id', getMark, async (req, res) => {
   if (req.body.studentId != null) {
     res.mark.studentId = req.body.studentId;
@@ -53,7 +48,6 @@ router.patch('/:id', getMark, async (req, res) => {
   }
 });
 
-// Route for deleting a mark record
 router.delete('/:id', getMark, async (req, res) => {
   try {
     await res.mark.remove();
@@ -63,7 +57,6 @@ router.delete('/:id', getMark, async (req, res) => {
   }
 });
 
-// Middleware function to get a single mark record by ID
 async function getMark(req, res, next) {
   let mark;
   try {

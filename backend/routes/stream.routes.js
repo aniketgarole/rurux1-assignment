@@ -1,10 +1,8 @@
-// routes/streamRoutes.js
 
 const express = require('express');
 const router = express.Router();
 const Stream = require('../models/stream.model');
 
-// Route for creating a new stream record
 router.post('/', async (req, res) => {
   try {
     const { name } = req.body;
@@ -16,7 +14,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Route for retrieving all stream records
 router.get('/', async (req, res) => {
   try {
     const streams = await Stream.find();
@@ -26,12 +23,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route for retrieving a single stream record by ID
 router.get('/:id', getStream, (req, res) => {
   res.json(res.stream);
 });
 
-// Route for updating a stream record
 router.patch('/:id', getStream, async (req, res) => {
   if (req.body.name != null) {
     res.stream.name = req.body.name;
@@ -44,7 +39,6 @@ router.patch('/:id', getStream, async (req, res) => {
   }
 });
 
-// Route for deleting a stream record
 router.delete('/:id', getStream, async (req, res) => {
   try {
     await res.stream.remove();
@@ -54,7 +48,6 @@ router.delete('/:id', getStream, async (req, res) => {
   }
 });
 
-// Middleware function to get a single stream record by ID
 async function getStream(req, res, next) {
   let stream;
   try {
